@@ -91,7 +91,15 @@ const data = [
 ];
 
 /*
-  Adım 1: Haber oluşturmak için 'haberYapici' adında bir bileşen(component) oluşturun.
+ 
+
+  
+
+
+
+  Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
+  Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
+   Adım 1: Haber oluşturmak için 'haberYapici' adında bir bileşen(component) oluşturun.
   Bileşeniniz, argümanı haberleri içeren dizi olarak alan bir fonksiyon olacak,
   ve aşağıdaki gibi görünen bir DOM düğümü döndürecek:
 
@@ -103,15 +111,51 @@ const data = [
 
     <button class="expandButton">+</button>
   </div>
-
+ 
   Adım 2: Hala `haberYapici` içindeyiz, button.expandButton 'a bir click event dinleyici ekleyin.
   Bu dinleyici div.article öğesine 'article-open' class'ını ekleyip/çıkaracak (toogle).
-
+  
   Adım 3: Fonksiyonunuzdan bir öğe döndürmeyi unutmayın.
-
+  
   Adım 4: Fonksiyonunuzun dışında, tüm datayı döngüye sokun(loop). Bir div.article öğesi oluşturmak ve bunu div.articles içindeki DOM'a eklemek için
   her yinelemede oluşturduğunuz bileşeninizi kullanacaksınız(bknz. index.html).
-
-  Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
-  Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+function haberYapici(title, date, firstp, secondp, thirdp) {
+  const div1 = document.createElement("div");
+  div1.classList.add("article");
+  const newsTitle = document.createElement("h2");
+  newsTitle.textContent = title;
+  const newsDate = document.createElement("p");
+  newsDate.classList.add("tarih");
+  newsDate.textContent = date;
+  const newsp1 = document.createElement("p");
+  newsp1.textContent = firstp;
+  const newsp2 = document.createElement("p");
+  newsp2.textContent = secondp;
+  const newsp3 = document.createElement("p");
+  newsp3.textContent = thirdp;
+  const newsButton = document.creatElement("button");
+  newsButton.classList.add(expandButton);
+  newsButton.textContent = "+";
+  newsButton.addEventListener("click", (e) => {
+    div1.classList.toggle("article-open");
+  });
+  div1.append(newsTitle);
+  div1.append(newsDate);
+  div1.append(newsp1);
+  div1.append(newsp2);
+  div1.append(newsp3);
+  div1.append(newsButton);
+  return div1;
+}
+const getNews = data.forEach((news) => {
+  haberYapici(
+    news.baslik,
+    news.tarih,
+    news.ilkParagraf,
+    news.ikinciParagraf,
+    news.ucuncuParagraf
+  );
+});
+const getArticles = document.querySelector(".articles");
+getArticles.append(getNews);
