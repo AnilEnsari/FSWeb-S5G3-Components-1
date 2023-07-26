@@ -134,8 +134,8 @@ function haberYapici(title, date, firstp, secondp, thirdp) {
   newsp2.textContent = secondp;
   const newsp3 = document.createElement("p");
   newsp3.textContent = thirdp;
-  const newsButton = document.creatElement("button");
-  newsButton.classList.add(expandButton);
+  const newsButton = document.createElement("button");
+  newsButton.classList.add("expandButton");
   newsButton.textContent = "+";
   newsButton.addEventListener("click", (e) => {
     div1.classList.toggle("article-open");
@@ -148,14 +148,14 @@ function haberYapici(title, date, firstp, secondp, thirdp) {
   div1.append(newsButton);
   return div1;
 }
-const getNews = data.forEach((news) => {
-  haberYapici(
+const getArticles = document.querySelector(".articles");
+data.forEach((news) => {
+  const haberYap = haberYapici(
     news.baslik,
     news.tarih,
     news.ilkParagraf,
     news.ikinciParagraf,
     news.ucuncuParagraf
   );
+  getArticles.append(haberYap);
 });
-const getArticles = document.querySelector(".articles");
-getArticles.append(getNews);
